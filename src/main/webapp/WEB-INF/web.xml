@@ -6,7 +6,7 @@
 
   <servlet>
     <servlet-name>CreateUserServlet</servlet-name>
-    <servlet-class>com.nikita.WebApplication.CreateUserServlet</servlet-class>
+    <servlet-class>com.nikita.controllers.CreateUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CreateUserServlet</servlet-name>
@@ -15,7 +15,7 @@
 
   <servlet>
     <servlet-name>UpdateUserServlet</servlet-name>
-    <servlet-class>com.nikita.WebApplication.UpdateUserServlet</servlet-class>
+    <servlet-class>com.nikita.controllers.UpdateUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateUserServlet</servlet-name>
@@ -24,7 +24,7 @@
 
   <servlet>
     <servlet-name>ShowUserServlet</servlet-name>
-    <servlet-class>com.nikita.WebApplication.ShowUserServlet</servlet-class>
+    <servlet-class>com.nikita.controllers.ShowUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ShowUserServlet</servlet-name>
@@ -33,7 +33,7 @@
 
   <servlet>
     <servlet-name>DeleteUserServlet</servlet-name>
-    <servlet-class>com.nikita.WebApplication.DeleteUserServlet</servlet-class>
+    <servlet-class>com.nikita.controllers.DeleteUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteUserServlet</servlet-name>

@@ -43,7 +43,7 @@
         </tr>
         <tr>
             <td>Age:</td>
-            <td><input name="age" required placeholder="Enter age"
+            <td><input name="age" type="number" required placeholder="Enter age"
                        oninvalid="this.setCustomValidity('Please enter Age')"
                        oninput="this.setCustomValidity('')"/></td>
         </tr>

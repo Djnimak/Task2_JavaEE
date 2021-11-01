@@ -30,7 +30,7 @@
     </c:forEach>
 </table>
 <br>
-<button><a href="showUser.jsp">Back</a></button>
+<button><a href="index.jsp">Back</a></button>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.nikita.WebApplication.constants;
+package com.nikita.constants;
 
 public interface Constants {
 

@@ -1,4 +1,4 @@
-package com.nikita.WebApplication.entity;
+package com.nikita.model.entity;
 
 public class User {
     private int id;

@@ -1,4 +1,4 @@
-package com.nikita.WebApplication.sqlConstants;
+package com.nikita.model.dao.sqlConstants;
 
 public interface SQLConstants {
 

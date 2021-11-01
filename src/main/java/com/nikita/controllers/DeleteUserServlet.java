@@ -1,7 +1,8 @@
-package com.nikita.WebApplication;
+package com.nikita.controllers;
 
-import com.nikita.WebApplication.constants.Constants;
-import com.nikita.WebApplication.sqlConstants.SQLConstants;
+import com.nikita.constants.Constants;
+import com.nikita.model.entity.User;
+import com.nikita.model.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -13,13 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DeleteUserServlet extends HttpServlet {
     private Connection connection;
-    private PreparedStatement statementDelete;
-    private PreparedStatement statementDeleteAll;
 
     @Override
     public void init(ServletConfig config) {
@@ -28,8 +26,6 @@ public class DeleteUserServlet extends HttpServlet {
             Class.forName(Constants.DB_DRIVER);
             connection = DriverManager.getConnection(sc.getInitParameter(Constants.DB_URL), sc.getInitParameter(Constants.DB_USER),
                     sc.getInitParameter(Constants.DB_PASS));
-            statementDelete = connection.prepareStatement(SQLConstants.DELETE_USER_EMAIL);
-            statementDeleteAll = connection.prepareStatement(SQLConstants.DELETE_ALL_USERS);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -37,42 +33,39 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter(Constants.EMAIL);
-        String password = request.getParameter(Constants.PASSWORD);
+        User user = new User();
+        user.setEmail(request.getParameter(Constants.EMAIL));
+        user.setPassword(request.getParameter(Constants.PASSWORD));
         String adminPassword = request.getParameter(Constants.ADMIN_PASSWORD);
         RequestDispatcher requestDispatcher;
         if (adminPassword == null) {
             try {
-                statementDelete.setString(1, email);
-                statementDelete.setString(2, password);
-                int result = statementDelete.executeUpdate();
+                UserService userService = new UserService();
+                int result = userService.deleteUser(user, connection);
                 requestDispatcher = request.getRequestDispatcher(Constants.INDEX_JSP);
                 if (result > 0) {
                     request.setAttribute(Constants.USER_DELETED, Constants.USER_DELETED_MESSAGE);
                     requestDispatcher.forward(request, response);
+                } else {
+                    request.setAttribute(Constants.USER_NOT_DELETED, Constants.USER_NOT_DELETED_MESSAGE);
+                    requestDispatcher = request.getRequestDispatcher(Constants.DELETE_JSP);
+                    requestDispatcher.include(request, response);
                 }
             } catch (ServletException | IOException e) {
                 e.printStackTrace();
-            } catch (SQLException throwables) {
-                request.setAttribute(Constants.USER_NOT_DELETED, Constants.USER_NOT_DELETED_MESSAGE);
-                requestDispatcher = request.getRequestDispatcher(Constants.DELETE_JSP);
-                requestDispatcher.include(request, response);
-                throwables.printStackTrace();
             }
         } else {
             if (adminPassword.equals(Constants.ADMIN_PASSWORD_VALUE)) {
-                try {
-                    int result = statementDeleteAll.executeUpdate();
-                    requestDispatcher = request.getRequestDispatcher(Constants.INDEX_JSP);
-                    if (result > 0) {
-                        request.setAttribute(Constants.ALL_USERS_DELETED, Constants.ALL_USERS_DELETED_MESSAGE);
-                        requestDispatcher.forward(request, response);
-                    }
-                } catch (SQLException throwables) {
+                UserService userService = new UserService();
+                int result = userService.deleteAllUsers(connection);
+                requestDispatcher = request.getRequestDispatcher(Constants.INDEX_JSP);
+                if (result > 0) {
+                    request.setAttribute(Constants.ALL_USERS_DELETED, Constants.ALL_USERS_DELETED_MESSAGE);
+                    requestDispatcher.forward(request, response);
+                } else {
                     request.setAttribute(Constants.USERS_NOT_DELETED, Constants.USERS_NOT_DELETED_MESSAGE);
                     requestDispatcher = request.getRequestDispatcher(Constants.DELETE_JSP);
                     requestDispatcher.include(request, response);
-                    throwables.printStackTrace();
                 }
             } else {
                 request.setAttribute(Constants.USERS_NOT_DELETED, Constants.USERS_NOT_DELETED_MESSAGE);
