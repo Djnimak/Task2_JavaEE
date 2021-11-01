@@ -8,7 +8,9 @@
 <form method="post" action="showUserServlet">
     <table>
         <tr>User Email:</tr>
-        <td><input name="email"/></td>
+        <td><input name="email" required placeholder="Enter email"
+        oninvalid="this.setCustomValidity('Please enter User Email')"
+        oninput="this.setCustomValidity('')"/></td>
         <tr>
             <td><input type="submit" value="Submit"/></td>
         </tr>

@@ -10,11 +10,15 @@
     <table>
         <tr>
             <td>Email:</td>
-            <td><input name="email"/></td>
+            <td><input name="email" required placeholder="Enter email"
+                       oninvalid="this.setCustomValidity('Please enter Email')"
+                       oninput="this.setCustomValidity('')"/></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input name="password" type="password"/></td>
+            <td><input name="password" type="password" required placeholder="Enter password"
+                       oninvalid="this.setCustomValidity('Please enter Password')"
+                       oninput="this.setCustomValidity('')"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Submit"/></td>
@@ -29,7 +33,9 @@
     <table>
         <tr>
             <td>Admin Password:</td>
-            <td><input name="adminPassword" type="password"/></td>
+            <td><input name="adminPassword" type="password" required placeholder="Enter admin password"
+                       oninvalid="this.setCustomValidity('Please enter Admin Password')"
+                       oninput="this.setCustomValidity('')"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Submit"/></td>
