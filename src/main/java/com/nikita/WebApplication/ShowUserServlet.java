@@ -37,7 +37,6 @@ public class ShowUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter(Constants.EMAIL);
         String command = request.getParameter(Constants.SHOW_ALL_USERS);
-        System.out.println(command);
         RequestDispatcher requestDispatcher;
         try (Statement statement1 = connection.createStatement()){
             if (command == null) {
