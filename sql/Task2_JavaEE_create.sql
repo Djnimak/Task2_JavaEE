@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS task2_javaee;
 CREATE DATABASE IF NOT EXISTS task2_javaee;
-USE eventsProject;
+USE task2_javaee;
 CREATE TABLE IF NOT EXISTS `user` (
                                       `id` INT NOT NULL AUTO_INCREMENT,
                                       `firstName` VARCHAR(255) NOT NULL,
