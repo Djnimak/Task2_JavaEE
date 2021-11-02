@@ -3,6 +3,7 @@ package com.nikita.controllers;
 import com.nikita.constants.Constants;
 import com.nikita.model.entity.User;
 import com.nikita.model.service.UserService;
+import com.nikita.model.service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -40,7 +41,7 @@ public class DeleteUserServlet extends HttpServlet {
         RequestDispatcher requestDispatcher;
         if (adminPassword == null) {
             try {
-                UserService userService = new UserService();
+                UserService userService = new UserServiceImpl();
                 int result = userService.deleteUser(user, connection);
                 requestDispatcher = request.getRequestDispatcher(Constants.INDEX_JSP);
                 if (result > 0) {
@@ -56,7 +57,7 @@ public class DeleteUserServlet extends HttpServlet {
             }
         } else {
             if (adminPassword.equals(Constants.ADMIN_PASSWORD_VALUE)) {
-                UserService userService = new UserService();
+                UserService userService = new UserServiceImpl();
                 int result = userService.deleteAllUsers(connection);
                 requestDispatcher = request.getRequestDispatcher(Constants.INDEX_JSP);
                 if (result > 0) {

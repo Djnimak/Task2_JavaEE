@@ -3,6 +3,7 @@ package com.nikita.controllers;
 import com.nikita.constants.Constants;
 import com.nikita.model.entity.User;
 import com.nikita.model.service.UserService;
+import com.nikita.model.service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -40,7 +41,7 @@ public class UpdateUserServlet extends HttpServlet {
         String newPassword = request.getParameter(Constants.NEW_PASSWORD);
         RequestDispatcher requestDispatcher;
         try {
-            UserService userService = new UserService();
+            UserService userService = new UserServiceImpl();
             int result = userService.updateUser(user, newEmail, newPassword, connection);
             requestDispatcher = request.getRequestDispatcher(Constants.INDEX_JSP);
             if (result > 0) {

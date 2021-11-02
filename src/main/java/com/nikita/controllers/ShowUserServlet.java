@@ -3,6 +3,7 @@ package com.nikita.controllers;
 import com.nikita.constants.Constants;
 import com.nikita.model.entity.User;
 import com.nikita.model.service.UserService;
+import com.nikita.model.service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -36,7 +37,7 @@ public class ShowUserServlet extends HttpServlet {
         String command = request.getParameter(Constants.SHOW_ALL_USERS);
         RequestDispatcher requestDispatcher;
         try {
-            UserService userService = new UserService();
+            UserService userService = new UserServiceImpl();
             List<User> list;
             if (command == null) {
                 list = userService.findUserByEmail(email, connection);
